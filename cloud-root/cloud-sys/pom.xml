@@ -9,16 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cloud-config</artifactId>
+    <artifactId>cloud-sys</artifactId>
 
-    <name>cloud-config</name>
-
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
+    <name>cloud-sys</name>
+    <modules>
+        <module>cloud-sys-web</module>
+        <module>cloud-sys-feign-service</module>
+    </modules>
+    <packaging>pom</packaging>
 
 
 </project>
