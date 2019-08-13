@@ -1,0 +1,1 @@
+zookeeper 服务注册中心，相当于eureka服务中心

@@ -1,0 +1,16 @@
+server:
+  port: 1025
+
+spring:
+  cloud:
+    zookeeper:
+
+      connect-string: localhost:2181
+      discovery:
+        root: /config
+        enabled: true
+        instance-host: localhost
+        instance-port: ${server.port}
+
+  application:
+    name: cloud-config-server

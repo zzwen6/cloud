@@ -3,15 +3,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>cloud-sys</artifactId>
+        <artifactId>cloud-config-center</artifactId>
         <groupId>top.hting.cloud</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cloud-sys-feign-service</artifactId>
+    <artifactId>cloud-zookeeper-server</artifactId>
 
-    <name>cloud-sys-feign-service</name>
+    <name>zookeeper-server</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -25,19 +25,14 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <version>2.1.2.RELEASE</version>
+            <artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>top.hting.cloud</groupId>
-            <artifactId>cloud-domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
 

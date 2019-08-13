@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: cloud-zookeeper-server
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181
+
+
+server:
+  port: 1024
+
+

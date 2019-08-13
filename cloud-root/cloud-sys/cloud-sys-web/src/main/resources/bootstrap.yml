@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: cloud-sys-web
+
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181

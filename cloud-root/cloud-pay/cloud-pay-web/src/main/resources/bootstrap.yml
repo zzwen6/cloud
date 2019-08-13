@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: cloud-pay-web
+
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181
