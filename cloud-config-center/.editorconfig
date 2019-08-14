@@ -1,0 +1,16 @@
+
+root = true
+
+[*]
+charset=utf-8
+insert_final_newline=false
+
+
+[{.eslintrc,.babelrc,jest.config,.stylelintrc,*.bowerrc,*.jsb3,*.jsb2,*.json,*.yml,*.yaml}]
+indent_style=space
+indent_size=2
+
+[*.{java, xml, sql}]
+indent_style=space
+indent_size=4
+
