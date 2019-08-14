@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: cloud-gateway-server
+  cloud:
+    config:
+      fail-fast: true
+      name: ${spring.application.name}
+      profile: dev
+      discovery:
+        enabled: true
+        service-id: cloud-config-server
+#    路由网关
+#    gateway:
+#      routes:
+#      - id: cloud-sys-web
+#        uri: lb://cloud-sys-web
+#        predicates:
+#          - Path=/cloud-sys-web/**
+#        filters:
+#          - StripPrefix=1
+#
+#      discovery:
+#        locator:
+#          enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://cloud:cloud@127.0.0.1:1030/eureka
+
