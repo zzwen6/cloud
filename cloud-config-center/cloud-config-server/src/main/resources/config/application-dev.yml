@@ -1,0 +1,9 @@
+# 公共配置，所有的启用dev模式的都进行读取
+spring:
+  datasource:
+    oracle:
+      type: com.alibaba.druid.pool.DruidDataSource
+      username: cloud
+      password: cloud
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      url: jdbc:oracle:thin:@127.0.0.1:49163/EE.oracle.docker

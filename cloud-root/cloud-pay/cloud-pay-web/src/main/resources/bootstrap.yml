@@ -3,5 +3,15 @@ spring:
     name: cloud-pay-web
 
   cloud:
-    zookeeper:
-      connect-string: localhost:2181
+    config:
+      fail-fast: true
+      name: ${spring.application.name}
+      profile: dev
+      discovery:
+        enabled: true
+        service-id: cloud-config-server
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://cloud:cloud@127.0.0.1:1030/eureka

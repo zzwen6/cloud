@@ -64,6 +64,22 @@
                 <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
                 <version>${cloud.version}</version>
             </dependency>
+
+            <!--config server-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-config-server</artifactId>
+                <version>${cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-gateway</artifactId>
+                <version>${cloud.version}</version>
+
+            </dependency>
+
+            <!--openfeign-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-openfeign</artifactId>

@@ -2,15 +2,19 @@ server:
   port: 1025
 
 spring:
-  cloud:
-    zookeeper:
-
-      connect-string: localhost:2181
-      discovery:
-        root: /config
-        enabled: true
-        instance-host: localhost
-        instance-port: ${server.port}
-
   application:
     name: cloud-config-server
+  profiles:
+    active: native
+  # 配置中心，设置为本地文件模式
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config/
+eureka:
+  client:
+    service-url:
+      defaultZone: http://cloud:cloud@127.0.0.1:1030/eureka
+
+

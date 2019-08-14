@@ -5,6 +5,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>cloud-config-server</module>
+        <module>cloud-eureka-server</module>
+        <module>cloud-gateway-server</module>
     </modules>
     <parent>
         <artifactId>cloud-dependencies</artifactId>

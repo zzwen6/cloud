@@ -15,7 +15,7 @@
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
     <modules>
-        <module>cloud-pay-controller</module>
+        <module>cloud-pay-web</module>
     </modules>
 
     <packaging>pom</packaging>
