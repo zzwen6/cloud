@@ -4,7 +4,7 @@ package top.hting.cloud;
  * Hello world!
  *
  */
-public class App 
+public class AuthServerApp
 {
     public static void main( String[] args )
     {
