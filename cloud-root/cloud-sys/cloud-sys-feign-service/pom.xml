@@ -36,7 +36,7 @@
 
         <dependency>
             <groupId>top.hting.cloud</groupId>
-            <artifactId>cloud-domain</artifactId>
+            <artifactId>cloud-public-domain</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

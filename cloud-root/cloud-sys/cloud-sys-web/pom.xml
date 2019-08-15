@@ -29,7 +29,7 @@
         </dependency>
         <dependency>
             <groupId>top.hting.cloud</groupId>
-            <artifactId>cloud-domain</artifactId>
+            <artifactId>cloud-public-domain</artifactId>
             <version>${model.version}</version>
         </dependency>
 
