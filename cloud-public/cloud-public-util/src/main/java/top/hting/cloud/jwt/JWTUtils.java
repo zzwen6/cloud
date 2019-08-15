@@ -18,7 +18,7 @@ public class JWTUtils {
     /**
      * 私钥
      */
-    private String secret = "123456";
+    private static String secret = "123456";
 
 
 
@@ -27,11 +27,11 @@ public class JWTUtils {
      * @param userInfo
      * @return
      */
-    public String generateToken(JWTUserInfo userInfo) {
-        return generateToken(userInfo, 30 * 60);
+    public static String generateToken(JWTUserInfo userInfo) {
+        return generateToken(userInfo, 30 );
     }
 
-    public String generateToken(JWTUserInfo userInfo, int expireMinute){
+    public static String generateToken(JWTUserInfo userInfo, int expireMinute){
 
         return Jwts.builder()
                 .setSubject(userInfo.getAccount())
@@ -49,7 +49,7 @@ public class JWTUtils {
      * @param token
      * @return
      */
-    public JWTUserInfo getInfoFromToken(String token){
+    public static JWTUserInfo getInfoFromToken(String token){
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
 
         Claims body = claimsJws.getBody();
@@ -57,6 +57,21 @@ public class JWTUtils {
         return new JWTUserInfo(body.getSubject(),
                 body.get(JWT_USER_NAME) == null?"":body.get(JWT_USER_NAME).toString(),
                 body.get(JWT_USER_ID)==null?"":body.get(JWT_USER_ID).toString());
+    }
+
+    /**
+     * 验证token是否过期
+     * @return true过期
+     */
+    public static boolean isExpire(String token){
+
+        Claims body = Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody();
+
+        return body.getExpiration().before(new Date());
+
     }
 
 
@@ -67,7 +82,7 @@ public class JWTUtils {
      * @param expireMinute 分钟
      * @return
      */
-    private Date generateExpirationDate(int expireMinute){
+    private static Date generateExpirationDate(int expireMinute){
         return new Date(System.currentTimeMillis() + expireMinute * 60 * 1000);
     }
 

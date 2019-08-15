@@ -47,7 +47,16 @@
         <!--    <groupId>org.springframework.cloud</groupId>-->
         <!--    <artifactId>spring-cloud-starter-oauth2</artifactId>-->
         <!--</dependency>-->
-
+        <dependency>
+            <groupId>top.hting.cloud</groupId>
+            <artifactId>cloud-public-domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>top.hting.cloud</groupId>
+            <artifactId>cloud-public-util</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

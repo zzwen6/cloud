@@ -1,18 +1,27 @@
 package top.hting.cloud.filter;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+import top.hting.cloud.jwt.JWTUserInfo;
+import top.hting.cloud.jwt.JWTUtils;
+import top.hting.cloud.response.BaseResponse;
+import top.hting.cloud.response.Token401Response;
 
 import java.net.URI;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * 全局网关过滤器，所有进入网关的请求都要经过此处
@@ -65,15 +74,66 @@ public class GlobalGatewayFilter implements GlobalFilter {
             return chain.filter(exchange.mutate().request(mutate.build()).build());
         }
 
-        // 获取用户请求的相关信息，判断是否有权限，是否限流等 TODO
 
+        // 获取用户请求的相关信息，判断是否有权限，是否限流等 TODO
+        JWTUserInfo jwtUserInfo = null;
+        final String token = getToken(request);
+        try {
+            // 未过期
+            if (!JWTUtils.isExpire(token)) {
+                jwtUserInfo = JWTUtils.getInfoFromToken(token);
+            }else {
+                return getResponse(exchange, new Token401Response("用户凭证过期无效"));
+            }
+
+        } catch (Exception e) {
+            return getResponse(exchange, new Token401Response("用户凭证过期无效"));
+        }
+        Consumer<HttpHeaders> newHeaders = new Consumer<HttpHeaders>() {
+            @Override
+            public void accept(HttpHeaders httpHeaders) {
+                httpHeaders.add(HttpHeaders.AUTHORIZATION, token);
+                httpHeaders.add("x-client-token",token);
+            }
+        };
+        mutate.headers(newHeaders);
+
+
+        // TODO 权限校验
 
         // 先直接放行 TODO
         return chain.filter(exchange.mutate().request(mutate.build()).build());
     }
 
+    private String getToken(ServerHttpRequest request) {
+        String token = null;
+        // 获取请求头
+        List<String> headers = request.getHeaders().get(HttpHeaders.AUTHORIZATION);
+        List<String> headers2 = request.getHeaders().get("x-client-token");
+
+        if (headers != null) {
+            token = headers.get(0);
+        }else if(headers2 != null){
+            token = headers2.get(0);
+        }
+
+        // 不在请求头，从查询参数获取token
+        if (StringUtils.isBlank(token)) {
+            // 获取url参数是否还有 token
+            List<String> strings = request.getQueryParams().get("token");
+            if (strings != null ){
+                token = strings.get(0);
+            }
+
+        }
+
+
+        return token;
+    }
+
     /**
      * 判断url是否以特定类型开头
+     *
      * @param requestUri
      * @return
      */
@@ -87,4 +147,13 @@ public class GlobalGatewayFilter implements GlobalFilter {
         return false;
 
     }
+
+
+    private Mono<Void> getResponse(ServerWebExchange exchange, BaseResponse baseResponse){
+        exchange.getResponse().setStatusCode(HttpStatus.OK);
+
+        return null;
+    }
+
+
 }
