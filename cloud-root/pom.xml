@@ -6,7 +6,6 @@
         <module>cloud-config</module>
         <module>cloud-domain</module>
         <module>cloud-sys</module>
-        <module>cloud-public</module>
         <module>cloud-pay</module>
     </modules>
 

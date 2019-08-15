@@ -1,19 +1,32 @@
 package top.hting.cloud.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import top.hting.cloud.dto.JwtUserDto;
+import top.hting.cloud.service.AuthTokenService;
 
 /**
  * jwt相关接口
  */
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/jwt")
 public class AuthTokenController {
 
+    @Autowired
+    AuthTokenService authTokenService;
+
+    /**
+     * 生成授权token
+     */
     @RequestMapping(value = "token",method = RequestMethod.POST)
-    public void createToken(){
+    public String createToken(@RequestBody JwtUserDto userDto){
+
+        // 去验证账号密码是否正确
+        return authTokenService.login(userDto);
 
 
     }

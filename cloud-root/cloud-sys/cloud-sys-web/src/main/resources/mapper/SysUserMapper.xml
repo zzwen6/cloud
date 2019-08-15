@@ -2,9 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.hting.cloud.mapper.SysUserMapper">
 
+    <resultMap id="UserDtoMap" type="top.hting.cloud.dto.UserDto">
+        <id column="USERID" property="user.userId"></id>
+        <result column="username" property="user.userName"/>
+        <result column="password" property="user.password"/>
+        <result column="account" property="user.account"/>
+    </resultMap>
+
 
     <select id="findById" resultType="top.hting.cloud.domain.SysUser">
         select * from sys_user where userId = #{userId}
         
+    </select>
+    <select id="findByAccount" resultMap="UserDtoMap">
+        select
+            USERID,
+            username,
+            password,
+            account
+        from SYS_USER
+        where account = #{account}
+
+
     </select>
 </mapper>

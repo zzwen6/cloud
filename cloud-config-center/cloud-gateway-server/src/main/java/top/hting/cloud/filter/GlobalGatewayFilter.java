@@ -27,8 +27,8 @@ public class GlobalGatewayFilter implements GlobalFilter {
     private static final String GATE_WAY_PREFIX = "/api";
 
 
-    @Value("${auth.pass:/auth/token}")
-    private String startWith;
+    // @Value("${auth.pass:/jwt/token,/auth/jwt/}")
+    private String startWith = "/jwt/token,/auth/jwt/";
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {

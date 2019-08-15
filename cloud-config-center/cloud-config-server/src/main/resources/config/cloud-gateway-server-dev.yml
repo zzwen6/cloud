@@ -9,11 +9,11 @@ spring:
         filters:
           - StripPrefix=2
       - id: cloud-auth-server
-          uri: lb://cloud-auth-server
-          predicates:
-            - Path=/api/authserver/**
-          filters:
-            - StripPrefix=2
+        uri: lb://cloud-auth-server
+        predicates:
+          - Path=/api/authserver/**
+        filters:
+          - StripPrefix=2
       discovery:
         locator:
           enabled: true

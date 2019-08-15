@@ -12,5 +12,10 @@ public class SysUser {
     @TableId("userId")
     private Long userId;
 
+    private String userName;
+
+    private String account;
+
+    private String password;
 
 }
