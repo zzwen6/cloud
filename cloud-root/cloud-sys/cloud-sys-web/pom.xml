@@ -86,13 +86,22 @@
             <artifactId>spring-cloud-config-client</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>top.hting.cloud</groupId>
             <artifactId>cloud-public-security</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
+        <dependency>
+            <groupId>top.hting.cloud</groupId>
+            <artifactId>cloud-public-redis</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

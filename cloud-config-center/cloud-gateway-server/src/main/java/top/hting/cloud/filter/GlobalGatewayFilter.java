@@ -3,7 +3,6 @@ package top.hting.cloud.filter;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
@@ -18,7 +17,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import top.hting.cloud.jwt.JWTUserInfo;
 import top.hting.cloud.jwt.JWTUtils;
-import top.hting.cloud.response.BaseResponse;
+import top.hting.cloud.response.domain.BaseResponse;
 import top.hting.cloud.response.Token401Response;
 
 import java.net.URI;

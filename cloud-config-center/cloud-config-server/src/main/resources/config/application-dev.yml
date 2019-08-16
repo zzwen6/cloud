@@ -7,3 +7,9 @@ spring:
       password: cloud
       driver-class-name: oracle.jdbc.driver.OracleDriver
       url: jdbc:oracle:thin:@127.0.0.1:49163/EE.oracle.docker
+
+  # 配置redis
+  redis:
+    host: 127.0.0.1
+    database: 3
+    port: 6400

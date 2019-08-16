@@ -7,6 +7,7 @@ import top.hting.cloud.domain.SysUser;
 import top.hting.cloud.dto.JwtUserDto;
 import top.hting.cloud.dto.UserDto;
 import top.hting.cloud.mapper.SysUserMapper;
+import top.hting.cloud.redis.RedisUtils;
 import top.hting.cloud.service.SysUserService;
 
 @Service
@@ -17,6 +18,9 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Autowired
     private BCryptPasswordEncoder encoder;
+
+    @Autowired
+    RedisUtils redisUtils;
 
     @Override
     public SysUser findById(Long userId) {
@@ -34,6 +38,7 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public UserDto findByAccount(String account) {
+        redisUtils.set("userId:account:" + account , account);
         return sysUserMapper.findByAccount(account);
     }
 }

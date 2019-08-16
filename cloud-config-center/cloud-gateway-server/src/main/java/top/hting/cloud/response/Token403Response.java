@@ -1,5 +1,7 @@
 package top.hting.cloud.response;
 
+import top.hting.cloud.response.domain.BaseResponse;
+
 /**
  * 未授权请求或资源
  */

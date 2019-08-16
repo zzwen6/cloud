@@ -1,4 +1,4 @@
-package top.hting.cloud.response;
+package top.hting.cloud.response.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,7 @@
 package top.hting.cloud.response;
 
 import lombok.Data;
+import top.hting.cloud.response.domain.BaseResponse;
 
 /**
  * token无效
