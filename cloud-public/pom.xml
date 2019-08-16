@@ -6,6 +6,7 @@
   <modules>
     <module>cloud-public-util</module>
     <module>cloud-public-domain</module>
+    <module>cloud-public-security</module>
   </modules>
   <parent>
     <artifactId>cloud-dependencies</artifactId>

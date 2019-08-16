@@ -1,6 +1,9 @@
 spring:
   cloud:
     gateway:
+      httpclient:
+        responseTimeout: 30000
+
       routes:
       - id: cloud-sys-web
         uri: lb://cloud-sys-web

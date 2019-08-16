@@ -15,7 +15,8 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     SysUserMapper sysUserMapper;
 
-    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     @Override
     public SysUser findById(Long userId) {
@@ -23,11 +24,16 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public UserDto findByAccount(JwtUserDto userDto) {
+    public UserDto findJwtUserByAccountThenValid(JwtUserDto userDto) {
         UserDto db = sysUserMapper.findByAccount(userDto.getAccount());
         if (encoder.matches(userDto.getPassword(), db.getUser().getPassword())) {
             return db;
         }
         return new UserDto();
+    }
+
+    @Override
+    public UserDto findByAccount(String account) {
+        return sysUserMapper.findByAccount(account);
     }
 }

@@ -3,15 +3,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>cloud-config-center</artifactId>
+        <artifactId>cloud-public</artifactId>
         <groupId>top.hting.cloud</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cloud-gateway-server</artifactId>
+    <artifactId>cloud-public-security</artifactId>
 
-    <name>cloud-gateway-server</name>
+    <name>cloud-public-security</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -25,41 +25,24 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-client</artifactId>
-        </dependency>
-        <!--<dependency>-->
-        <!--    <groupId>org.springframework.cloud</groupId>-->
-        <!--    <artifactId>spring-cloud-starter-oauth2</artifactId>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>top.hting.cloud</groupId>
-            <artifactId>cloud-public-domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
         </dependency>
         <dependency>
             <groupId>top.hting.cloud</groupId>
             <artifactId>cloud-public-util</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
         </dependency>
     </dependencies>
 

@@ -85,7 +85,14 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-client</artifactId>
         </dependency>
-        
+
+
+        <dependency>
+            <groupId>top.hting.cloud</groupId>
+            <artifactId>cloud-public-security</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <build>

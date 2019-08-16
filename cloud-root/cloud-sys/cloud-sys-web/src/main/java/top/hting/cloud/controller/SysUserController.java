@@ -26,7 +26,7 @@ public class SysUserController {
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public UserDto login(@RequestBody JwtUserDto userDto){
-        UserDto user = sysUserService.findByAccount(userDto);
+        UserDto user = sysUserService.findJwtUserByAccountThenValid(userDto);
         return user;
     }
 

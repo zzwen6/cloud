@@ -1,5 +1,6 @@
 package top.hting.cloud.filter;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,10 +8,13 @@ import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import top.hting.cloud.jwt.JWTUserInfo;
 import top.hting.cloud.jwt.JWTUtils;
@@ -18,6 +22,7 @@ import top.hting.cloud.response.BaseResponse;
 import top.hting.cloud.response.Token401Response;
 
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -33,7 +38,7 @@ public class GlobalGatewayFilter implements GlobalFilter {
     /**
      * 网关请求用 /api前缀开头
      */
-    private static final String GATE_WAY_PREFIX = "/api";
+    private static final String GATE_WAY_PREFIX = "/api/authserver";
 
 
     // @Value("${auth.pass:/jwt/token,/auth/jwt/}")
@@ -83,23 +88,23 @@ public class GlobalGatewayFilter implements GlobalFilter {
             if (!JWTUtils.isExpire(token)) {
                 jwtUserInfo = JWTUtils.getInfoFromToken(token);
             }else {
-                return getResponse(exchange, new Token401Response("用户凭证过期无效"));
+                return getResponse(exchange, new Token401Response("用户凭证过期或无效"));
             }
 
         } catch (Exception e) {
-            return getResponse(exchange, new Token401Response("用户凭证过期无效"));
+            return getResponse(exchange, new Token401Response("用户凭证过期或无效"));
         }
-        Consumer<HttpHeaders> newHeaders = new Consumer<HttpHeaders>() {
-            @Override
-            public void accept(HttpHeaders httpHeaders) {
-                httpHeaders.add(HttpHeaders.AUTHORIZATION, token);
-                httpHeaders.add("x-client-token",token);
-            }
+
+        // 重新把token放进header中
+        Consumer<HttpHeaders> newHeaders = httpHeaders -> {
+            httpHeaders.add(HttpHeaders.AUTHORIZATION, token);
+            httpHeaders.add("x-client-token",token);
         };
         mutate.headers(newHeaders);
 
-
         // TODO 权限校验
+        // 获取当前用户的权限
+
 
         // 先直接放行 TODO
         return chain.filter(exchange.mutate().request(mutate.build()).build());
@@ -150,9 +155,12 @@ public class GlobalGatewayFilter implements GlobalFilter {
 
 
     private Mono<Void> getResponse(ServerWebExchange exchange, BaseResponse baseResponse){
+        // 状态码设置为200
+        exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON_UTF8);
         exchange.getResponse().setStatusCode(HttpStatus.OK);
-
-        return null;
+        String json = JSONObject.toJSONString(baseResponse);
+        DataBuffer dataBuffer = exchange.getResponse().bufferFactory().wrap(json.getBytes(StandardCharsets.UTF_8));
+        return exchange.getResponse().writeWith(Flux.just(dataBuffer));
     }
 
 

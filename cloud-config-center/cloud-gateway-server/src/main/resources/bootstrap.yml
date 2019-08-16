@@ -27,4 +27,3 @@ eureka:
   client:
     service-url:
       defaultZone: http://cloud:cloud@127.0.0.1:1030/eureka
-
