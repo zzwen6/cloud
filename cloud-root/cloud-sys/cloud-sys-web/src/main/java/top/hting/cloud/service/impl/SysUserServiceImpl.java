@@ -3,7 +3,7 @@ package top.hting.cloud.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import top.hting.cloud.domain.SysUser;
+import top.hting.cloud.entity.SysUser;
 import top.hting.cloud.dto.JwtUserDto;
 import top.hting.cloud.dto.UserDto;
 import top.hting.cloud.mapper.SysUserMapper;

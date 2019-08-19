@@ -2,7 +2,7 @@ package top.hting.cloud.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
-import top.hting.cloud.domain.SysUser;
+import top.hting.cloud.entity.SysUser;
 import top.hting.cloud.dto.UserDto;
 
 public interface SysUserMapper extends BaseMapper<SysUser> {

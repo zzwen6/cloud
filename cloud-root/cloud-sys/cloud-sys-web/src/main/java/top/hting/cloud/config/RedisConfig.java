@@ -53,6 +53,9 @@ public class RedisConfig {
 
         redisTemplate.setKeySerializer(jackson2JsonRedisSerializer);
         redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }

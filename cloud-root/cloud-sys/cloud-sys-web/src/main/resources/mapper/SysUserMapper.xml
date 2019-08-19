@@ -10,7 +10,7 @@
     </resultMap>
 
 
-    <select id="findById" resultType="top.hting.cloud.domain.SysUser">
+    <select id="findById" resultType="top.hting.cloud.entity.SysUser">
         select * from sys_user where userId = #{userId}
         
     </select>

@@ -1,6 +1,6 @@
 package top.hting.cloud.service;
 
-import top.hting.cloud.domain.SysUser;
+import top.hting.cloud.entity.SysUser;
 import top.hting.cloud.dto.JwtUserDto;
 import top.hting.cloud.dto.UserDto;
 

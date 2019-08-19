@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * jwt工具，生成，解析token
  */
-public class JWTUtils {
+public final class JWTUtils {
 
     public static final String JWT_USER_ID = "userId";
     public static final String JWT_USER_NAME = "userName";

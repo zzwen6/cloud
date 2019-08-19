@@ -4,7 +4,7 @@ package top.hting.cloud.feign;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import top.hting.cloud.domain.SysUser;
+import top.hting.cloud.entity.SysUser;
 
 @FeignClient(value = "cloud-sys-web",path = "/sysUser")
 public interface SysUserService {

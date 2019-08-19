@@ -8,7 +8,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import top.hting.cloud.domain.SysUser;
+import top.hting.cloud.entity.SysUser;
 import top.hting.cloud.feign.SysUserService;
 
 /**
