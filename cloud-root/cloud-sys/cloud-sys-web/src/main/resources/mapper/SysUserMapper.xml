@@ -7,21 +7,40 @@
         <result column="username" property="user.userName"/>
         <result column="password" property="user.password"/>
         <result column="account" property="user.account"/>
+
+        <collection property="permissions" ofType="top.hting.cloud.entity.SysPermission">
+            <id column="pid" property="pid"></id>
+            <result property="resourceUrl" column="resourceUrl"></result>
+
+        </collection>
+
     </resultMap>
 
 
     <select id="findById" resultType="top.hting.cloud.entity.SysUser">
-        select * from sys_user where userId = #{userId}
-        
+        select *
+        from sys_user
+        where userId = #{userId}
+
     </select>
     <select id="findByAccount" resultMap="UserDtoMap">
-        select
-            USERID,
-            username,
-            password,
-            account
+        select USERID,
+               username,
+               password,
+               account
         from SYS_USER
         where account = #{account}
+
+
+    </select>
+    <select id="findUserPermissionByUserId" resultMap="UserDtoMap">
+        SELECT su.userid, su.account, su.username, sp.pid, sp.resourceurl
+        FROM SYS_USER su
+                 LEFT JOIN USER_ROLE_RELATION urr ON su.userid = urr.userid
+                 LEFT JOIN SYS_ROLE sr ON urr.roleid = sr.roleid
+                 LEFT JOIN role_permission_relation rpr ON sr.roleid = rpr.roleid
+                 LEFT JOIN SYS_PERMESSION sp ON sp.pid = rpr.pid
+        WHERE su.userid = #{userId}
 
 
     </select>

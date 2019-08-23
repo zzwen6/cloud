@@ -3,6 +3,7 @@ package top.hting.cloud.filter;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
@@ -15,6 +16,8 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import top.hting.cloud.dto.UserDto;
+import top.hting.cloud.feign.SysUserService;
 import top.hting.cloud.jwt.JWTUserInfo;
 import top.hting.cloud.jwt.JWTUtils;
 import top.hting.cloud.response.domain.BaseResponse;
@@ -33,6 +36,10 @@ import java.util.function.Consumer;
 @Slf4j
 @Configuration
 public class GlobalGatewayFilter implements GlobalFilter {
+
+    @Autowired
+    SysUserService sysUserService;
+
 
     /**
      * 网关请求用 /api前缀开头
@@ -103,6 +110,10 @@ public class GlobalGatewayFilter implements GlobalFilter {
 
         // TODO 权限校验
         // 获取当前用户的权限
+        // 通过id获取用户的权限
+        UserDto permission = sysUserService.getUserPermissionById(Long.valueOf(jwtUserInfo.getUserId()));
+
+
 
 
         // 先直接放行 TODO

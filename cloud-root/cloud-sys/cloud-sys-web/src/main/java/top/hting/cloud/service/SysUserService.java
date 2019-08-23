@@ -25,4 +25,5 @@ public interface SysUserService {
      */
     UserDto findByAccount(String account);
 
+    UserDto findUserPermission(Long userId);
 }

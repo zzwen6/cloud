@@ -11,7 +11,7 @@ public class BaseResponse {
 
     private int resultCode = 200;
 
-    private String message;
+    private String message = "操作成功";
 
 
 

@@ -1,6 +1,7 @@
 package top.hting.cloud.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import top.hting.cloud.entity.SysUser;
@@ -40,5 +41,14 @@ public class SysUserServiceImpl implements SysUserService {
     public UserDto findByAccount(String account) {
         redisUtils.set("userId:account:" + account , account);
         return sysUserMapper.findByAccount(account);
+    }
+
+    // @Cacheable
+    @Override
+    public UserDto findUserPermission(Long userId) {
+
+        UserDto userDto = sysUserMapper.findUserPermissionByUserId(userId);
+
+        return userDto;
     }
 }

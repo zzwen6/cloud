@@ -20,3 +20,11 @@ spring:
       discovery:
         locator:
           enabled: true
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE

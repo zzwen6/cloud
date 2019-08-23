@@ -1,7 +1,11 @@
 package top.hting.cloud.dto;
 
 import lombok.Data;
+import top.hting.cloud.entity.SysPermission;
 import top.hting.cloud.entity.SysUser;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * 用户，包含权限，角色等信息
@@ -13,5 +17,5 @@ public class UserDto {
 
     // private SysRole role;
 
-
+    private List<SysPermission> permissions;
 }

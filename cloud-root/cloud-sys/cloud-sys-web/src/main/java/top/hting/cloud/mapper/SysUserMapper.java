@@ -6,7 +6,9 @@ import top.hting.cloud.entity.SysUser;
 import top.hting.cloud.dto.UserDto;
 
 public interface SysUserMapper extends BaseMapper<SysUser> {
-    SysUser findById(Long userId);
+    SysUser findById(@Param("userId") Long userId);
 
     UserDto findByAccount(@Param("account") String account);
+
+    UserDto findUserPermissionByUserId(@Param("userId") Long userId);
 }
