@@ -1,30 +1,30 @@
-spring:
-  cloud:
-    gateway:
-      httpclient:
-        responseTimeout: 30000
-
-      routes:
-      - id: cloud-sys-web
-        uri: lb://cloud-sys-web
-        predicates:
-          - Path=/api/sysweb/**
-        filters:
-          - StripPrefix=2
-      - id: cloud-auth-server
-        uri: lb://cloud-auth-server
-        predicates:
-          - Path=/api/authserver/**
-        filters:
-          - StripPrefix=2
-      discovery:
-        locator:
-          enabled: true
-
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          strategy: SEMAPHORE
+#spring:
+#  cloud:
+#    gateway:
+#      httpclient:
+#        responseTimeout: 30000
+#
+#      routes:
+#      - id: cloud-sys-web
+#        uri: lb://cloud-sys-web
+#        predicates:
+#          - Path=/api/sysweb/**
+#        filters:
+#          - StripPrefix=2
+#      - id: cloud-auth-server
+#        uri: lb://cloud-auth-server
+#        predicates:
+#          - Path=/api/authserver/**
+#        filters:
+#          - StripPrefix=2
+#      discovery:
+#        locator:
+#          enabled: true
+#
+#
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          strategy: SEMAPHORE

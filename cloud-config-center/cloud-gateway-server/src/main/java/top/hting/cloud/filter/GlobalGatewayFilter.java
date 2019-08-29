@@ -17,17 +17,21 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import top.hting.cloud.dto.UserDto;
+import top.hting.cloud.entity.SysPermission;
 import top.hting.cloud.feign.SysUserService;
 import top.hting.cloud.jwt.JWTUserInfo;
 import top.hting.cloud.jwt.JWTUtils;
+import top.hting.cloud.response.Token403Response;
 import top.hting.cloud.response.domain.BaseResponse;
 import top.hting.cloud.response.Token401Response;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -94,11 +98,11 @@ public class GlobalGatewayFilter implements GlobalFilter {
             if (!JWTUtils.isExpire(token)) {
                 jwtUserInfo = JWTUtils.getInfoFromToken(token);
             }else {
-                return getResponse(exchange, new Token401Response("用户凭证过期或无效"));
+                return getResponse(exchange, new Token403Response("用户凭证过期或无效"));
             }
 
         } catch (Exception e) {
-            return getResponse(exchange, new Token401Response("用户凭证过期或无效"));
+            return getResponse(exchange, new Token403Response("用户凭证过期或无效"));
         }
 
         // 重新把token放进header中
@@ -107,14 +111,17 @@ public class GlobalGatewayFilter implements GlobalFilter {
             httpHeaders.add("x-client-token",token);
         };
         mutate.headers(newHeaders);
+        log.info("GlobalGatewayFilter:{}",Thread.currentThread().getName());
 
         // TODO 权限校验
         // 获取当前用户的权限
         // 通过id获取用户的权限
         UserDto permission = sysUserService.getUserPermissionById(Long.valueOf(jwtUserInfo.getUserId()));
+        Set<String> set = toSets(permission.getPermissions());
+        if (!set.contains(requestUri)) {
+            return getResponse(exchange, new Token401Response("未授权的请求"));
 
-
-
+        }
 
         // 先直接放行 TODO
         return chain.filter(exchange.mutate().request(mutate.build()).build());
@@ -173,5 +180,15 @@ public class GlobalGatewayFilter implements GlobalFilter {
         return exchange.getResponse().writeWith(Flux.just(dataBuffer));
     }
 
+
+    private Set<String> toSets(List<SysPermission> permissions){
+        Set<String> sets = new HashSet<>();
+        permissions.forEach(p->{
+            sets.add(p.getResourceUrl());
+
+        });
+        return sets;
+
+    }
 
 }

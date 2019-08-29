@@ -1,6 +1,7 @@
 package top.hting.cloud.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ public class SysUserController {
         return user;
     }
 
-
+    // @PreAuthorize("hasAuthority('haha')")
     @RequestMapping(value = "/getUserPermissionById",method = RequestMethod.GET)
     public UserDto getUserPermissionById(@RequestParam("userId") Long userId){
 

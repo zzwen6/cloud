@@ -43,7 +43,7 @@ public class SysUserServiceImpl implements SysUserService {
         return sysUserMapper.findByAccount(account);
     }
 
-    // @Cacheable
+    @Cacheable(value = "userPermission",key = "'user:permission:' + #userId")
     @Override
     public UserDto findUserPermission(Long userId) {
 

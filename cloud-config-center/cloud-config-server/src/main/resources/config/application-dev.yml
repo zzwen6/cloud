@@ -13,3 +13,9 @@ spring:
     host: 127.0.0.1
     database: 3
     port: 6400
+
+# 开发时配置心跳时间为10秒以及告诉server端10秒种剔除
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 10

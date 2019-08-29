@@ -3,12 +3,13 @@ package top.hting.cloud.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import top.hting.cloud.config.FeignConfig;
 import top.hting.cloud.dto.UserDto;
 import top.hting.cloud.entity.SysUser;
 
-@FeignClient(value = "cloud-sys-web",path = "/sysUser",configuration = FeignConfig.class)
+@FeignClient(value = "cloud-sys-web",path = "/sysUser")
 public interface SysUserService {
 
     /**
@@ -24,7 +25,7 @@ public interface SysUserService {
      * @param userId
      * @return
      */
-    @GetMapping("getUserPermissionById/inner")
+    @GetMapping("getUserPermissionById")
     UserDto getUserPermissionById(@RequestParam("userId") Long userId);
 
 }

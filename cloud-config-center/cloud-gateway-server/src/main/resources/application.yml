@@ -1,3 +1,22 @@
 server:
   port: 1040
 
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+  shareSecurityContext: true
+
+
+#management:
+#  endpoint:
+#    hystrix:
+#      config:
+#        shareSecurityContext: true
+feign:
+  hystrix:
+    enabled: true

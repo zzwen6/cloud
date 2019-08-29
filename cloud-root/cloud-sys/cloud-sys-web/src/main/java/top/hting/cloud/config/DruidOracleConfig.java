@@ -3,6 +3,7 @@ package top.hting.cloud.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import org.apache.ibatis.logging.stdout.StdOutImpl;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -35,7 +36,7 @@ public class DruidOracleConfig {
         MybatisConfiguration config = new MybatisConfiguration();
         config.setMapUnderscoreToCamelCase(false);
         config.setCacheEnabled(true);
-
+        config.setLogImpl(StdOutImpl.class);
         factoryBean.setConfiguration(config);
 
 

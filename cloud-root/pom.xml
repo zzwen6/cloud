@@ -12,6 +12,7 @@
         <artifactId>cloud-dependencies</artifactId>
         <groupId>top.hting.cloud</groupId>
         <version>0.0.1-SNAPSHOT</version>
+
     </parent>
 
 
@@ -23,11 +24,14 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
+
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <skipTests>true</skipTests>
+
     </properties>
 
 

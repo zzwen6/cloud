@@ -19,5 +19,9 @@ eureka:
       defaultZone: http://cloud:cloud@${eureka.instance.hostname}:${server.port}/eureka
   instance:
     hostname: 127.0.0.1
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 2000
+
 
 

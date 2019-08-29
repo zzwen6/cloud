@@ -10,27 +10,39 @@ spring:
         enabled: true
         service-id: cloud-config-server
 #    路由网关
-#    gateway:
-#      routes:
-#      - id: cloud-sys-web
-#        uri: lb://cloud-sys-web
-#        predicates:
-#          - Path=/cloud-sys-web/**
-#        filters:
-#          - StripPrefix=1
-#
-#      discovery:
-#        locator:
-#          enabled: true
+    gateway:
+      httpclient:
+        responseTimeout: 30000
+
+      routes:
+        - id: cloud-sys-web
+          uri: lb://cloud-sys-web
+          predicates:
+            - Path=/api/sysweb/**
+          filters:
+            - StripPrefix=2
+        - id: cloud-auth-server
+          uri: lb://cloud-auth-server
+          predicates:
+            - Path=/api/authserver/**
+          filters:
+            - StripPrefix=2
+      discovery:
+        locator:
+          enabled: true
+
 
 eureka:
   client:
     service-url:
       defaultZone: http://cloud:cloud@127.0.0.1:1030/eureka
 
-#hystrix:
-#  command:
-#    default:
-#      execution:
-#        isolation:
-#          strategy: SEMAPHORE
+## 没生效，原因未知 TODO
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+
+

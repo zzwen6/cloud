@@ -26,7 +26,7 @@ public class AuthTokenServiceImpl implements AuthTokenService {
         UserDto userDto1 = userServiceFeign.login(userDto);
 
         // 验证成功，生成token返回
-        String token = JWTUtils.generateToken(new JWTUserInfo(userDto1.getUser().getAccount(), userDto1.getUser().getUserName(), userDto1.getUser().getUserId().toString()));
+        String token = JWTUtils.generateToken(new JWTUserInfo(userDto1.getUser().getAccount(), userDto1.getUser().getUserName(), userDto1.getUser().getUserId().toString()), 8 * 60);
         redisUtils.hset(UserRedisConstant.USER_TOKEN_HASH, userDto1.getUser().getAccount(), token, 30 * 60);
 
         log.info("token:{}", token);

@@ -1,22 +1,33 @@
 package top.hting.cloud.security;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class JwtUserDetails implements UserDetails {
     private String password;
     private String username;
-
-    public JwtUserDetails(String password, String username) {
+    private List<String> permissions;
+    public JwtUserDetails(String password, String username,List<String> permissions) {
         this.password = password;
         this.username = username;
+        this.permissions = permissions;
+
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<SimpleGrantedAuthority> simples = new ArrayList<>();
+
+        permissions.forEach(p -> {
+            simples.add(new SimpleGrantedAuthority(p));
+        });
+
+        return simples;
     }
 
     @Override
